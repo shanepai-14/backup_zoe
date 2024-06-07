@@ -1,0 +1,278 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.wrapper {
+    width: 816px;
+    /* border: 1px dashed red; */
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: rgba(0, 162, 255, 0.925);
+    margin: 0;
+    padding: 0;
+}
+
+
+
+.logo {
+    width: 10%;
+    border: 1px solid black;
+    padding: 0;
+}
+
+.logo img {
+    width: 100%;
+    height: 90px;
+}
+
+.logo2 {
+    border: 1px solid black;
+    width: 15%;
+    padding: 0;
+}
+
+.logo2 .p1 {
+    font-weight: 600;
+    font-size: 20px;
+    background-color: black;
+    color: yellow;
+    margin: 0;
+}
+
+.logo2 .p2 {
+    font-size: 28px;
+    margin-top: -10px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.logo2 .p3 {
+    font-size: 18px;
+    color: white;
+    margin-top: -12px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.logo2 .p4 {
+    font-size: 8px;
+    color: white;
+    font-weight: 500;
+    background-color: black;
+    margin: 0;
+}
+
+.icons {
+    padding-left: 10px;
+    font-size: 12px;
+    color: white;
+    margin: 0;
+}
+
+.title {
+    font-weight: 700;
+    text-align: right;
+    padding: 0;
+    margin: 0;
+}
+
+.title h1 {
+    color: yellow;
+    margin: 0;
+}
+
+.date {
+    text-align: right;
+}
+
+.date .d {
+    font-weight: 700;
+    margin-left: 15px;
+}
+
+.s-2-a {
+    float: left; /* Float both divs to the left */
+    width: 65%; /* Each div takes up 50% of the parent container */
+    border: 1px solid black;
+}
+.s-2-b {
+    float: left; /* Float both divs to the left */
+    width: 35%; /* Each div takes up 50% of the parent container */
+    border: 1px solid black;
+}
+.s-title{
+    font-size: 14px;
+    text-align: center;
+    background-color: rgba(0, 162, 255, 0.925);
+    padding: 10px;
+    margin: 0;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.ad-1, .ad-2, .ad-3, .ad-4 {
+    float: left; /* Float both divs to the left */
+    width: 65%; /* Each div takes up 50% of the parent container */
+    background-color: rgb(202, 202, 202);
+}
+.ad-1{
+    width: 35% !important;
+    text-align: center;
+    font-weight: 700;
+    color: white;
+    padding: 10px;
+}
+.ad-2{
+    font-weight: 700; 
+    padding: 10px;
+}
+.ad-4{
+    font-weight: 700; 
+    margin: 0;
+    padding-left: 10px;
+}
+.ad-3{
+    width: 35% !important;
+    height: 150px;
+    text-align: center;
+    padding-top: 50px;
+    font-weight: 700;
+    color: white;
+    font-size: 16px;
+}
+
+/* #s-2-a .ad-content-gray{
+    background-color: white;
+} */
+.s-2-a .ad-content{
+    background-color: white;
+}
+
+.s2-icons{
+   
+    font-weight: 500;
+    font-size: 12px;
+    padding: 5px;
+}
+.s2-content{
+    
+    font-weight: 500;
+    font-size: 12px;
+    padding: 5px;
+    color: rgba(0, 162, 255, 0.925);
+}
+
+.s2-content .content-right{
+    padding-left: 12px;
+    font-weight: 700;
+    color: black !important;
+}
+.pob{
+    background-color: rgb(199, 197, 197);
+    text-align: center;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 5px;
+}
+.br{
+    background-color: rgb(199, 197, 197);
+    font-size: 20px;
+    font-weight: 600;
+    padding: 5px;
+    color: rgb(6, 115, 165);
+}
+
+/* section 3 */
+.s3, .s3 {
+    float: left; /* Float both divs to the left */
+    width: 50%; /* Each div takes up 50% of the parent container */
+    /* border: 1px solid black; */
+    margin-top: 10px;
+}
+
+.s3 h1{
+    color: rgb(7, 150, 245);
+    font-weight: 700;
+    font-size: 24px;
+
+}
+.bps{
+    width: 100%;
+}
+.bpstr{
+    padding: 20px;
+}
+.bpstd {
+    position: relative;
+    border: 1px solid gray;
+    padding: 5px;
+    text-align: center;
+}
+.bpstd i{
+    position: absolute;
+    font-size: 22px;
+    left: -12px;
+    color: rgb(7, 150, 245);
+}
+/* section 4 */
+
+.s4{
+    float: left; /* Float both divs to the left */
+    width: 100%; /* Each div takes up 50% of the parent container */
+    /* border: 1px solid black; */
+    margin-top: 10px;
+    
+}
+
+.s4 h1{
+    width: 40%; /* Each div takes up 50% of the parent container */
+    background-color: rgba(0, 162, 255, 0.925); 
+    padding: 5px;
+    color: white;
+    text-align: center;
+    font-size: 14px;
+}
+
+.s4 ul{
+    font-weight: 600;
+    color: rgb(54, 54, 54);
+    border: 1px solid rgba(0, 162, 255, 0.925);
+    margin-top: -10px;
+    font-style:italic;
+    font-size: 18px;
+    letter-spacing: 1px;
+    padding-top: 5px;
+}
+
+/* section 5 */
+.s5{
+    float: left; /* Float both divs to the left */
+    width: 100%; /* Each div takes up 50% of the parent container */
+    /* border: 1px solid black; */
+    margin-top: -10px; 
+    padding-left: 5px;
+    background-color: rgb(199, 197, 197);
+    color: white;
+    font-size: 10px;
+}
+
+
+th, td {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+.completed{
+    background-color: rgb(219, 218, 218);
+    color: white;
+}
+
+.pending{
+    background-color: rgb(199, 197, 197);
+}
+

@@ -1,0 +1,16 @@
+setup (need to install)
+    - nodejs, composer, xampp 8.1.
+
+how to run
+    - git clone https://github.com/JohnPaulQuintana/ZOE.git or download the zipped file then extract it.
+    - cd 'on folder name' like this cd ZOE, depends on foldername after you extracted.
+    - copy the .env.example then paste it ahead. rename it as .env.
+On terminal or vscode terminal
+    - composer install
+    - npm install
+    - php artisan migrate (make sure nakarun yung xampp)
+    - php artisan key:generate
+    - php artisan optimize:clear
+    - npm run dev
+    - php artisan serve.
+    - open this http://127.0.0.1:8000/
