@@ -18,15 +18,31 @@
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-light.css">
 
     <link rel="stylesheet" href="{{ asset('css/print.css') }}">
+    <style>
+     .bg-login{
+         background-image: url("{{ asset('images/bg_logo.jpg') }}");
+         background-size:cover;
+         background-position: center;
+         background-repeat: no-repeat;
+         background-attachment: fixed;
+         background-blend-mode: multiply;
+         height: 100vh;
+         width: 100vw;
+         position: relative;
+         z-index: -1;
+         overflow: hidden;
+     }
+        
+    </style>
 </head>
 
-<body class="">
-
-    <section class="bg-gray-50 dark:bg-gray-900">
+<body class="bg-login">
+   
+    <section class="bg-[gray-50]  dark:bg-gray-900">
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
             <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-                <img class="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo">
-                Zoe
+                {{-- <img class="w-32 h-32 mr-2" src="{{ asset('images/logocrop.jpg')}}" alt="logo"> --}}
+                {{-- Zoe --}}
             </a>
             <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                 <div class="p-6 space-y-4 md:space-y-6 sm:p-8">

@@ -3,7 +3,13 @@
     box-sizing: border-box;
 
 }
-
+@media print {
+    body {
+        background-color: rgb(202, 202, 202)!important;
+        -webkit-print-color-adjust: exact;
+        color-adjust: exact;
+    }
+}
 .wrapper {
     width: 816px;
     border: 1px dashed red;
@@ -12,7 +18,7 @@
 }
 
 #header {
-    background-color: rgba(0, 162, 255, 0.925);
+    background-color: #00366A;
     margin: 0;
     padding: 0;
 }
@@ -61,8 +67,8 @@ td {
 }
 
 #logo2 #p4 {
-    font-size: 10px;
-    color: white;
+    font-size: 8px;
+    color: yellow;
     font-weight: 500;
     background-color: black;
 }
