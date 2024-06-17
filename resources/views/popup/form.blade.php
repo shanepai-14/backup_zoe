@@ -8,7 +8,7 @@
         <div>
             
 
-            <form class="mx-auto" action="{{ route('store') }}" method="POST">
+            <form class="mx-auto" id="myForm" action="{{ route('store') }}" method="POST">
                 @csrf
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
                     <div class="mb-5">
@@ -45,14 +45,29 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                <div class="grid grid-cols-1 md:grid-cols-1 gap-2">
                     <div class="mb-5">
                         <label for="subject" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Subject.</label>
                         <input type="text" name="subject" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
                     </div>
-                    <div class="mb-5">
+                  
+                </div>
+                <div  class="grid grid-cols-1 md:grid-cols-1 gap-2">
+                    <div class="mb-5 w-full">
                         <label for="scheduled_of_broadcast" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Scheduled of Broadcast.</label>
-                        <input type="text" name="scheduled_of_broadcast" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Fridays, 2:00-3:00PM" required />
+                        <input type="hidden" id="scheduled_of_broadcast" name="scheduled_of_broadcast" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Fridays, 2:00PM-3:00PM"  />
+                       <div class="flex">
+                        <select id="dayOfWeek">
+                            <option value="Monday">Monday</option>
+                            <option value="Tuesday">Tuesday</option>
+                            <option value="Wednesday">Wednesday</option>
+                            <option value="Thursday">Thursday</option>
+                            <option value="Friday">Friday</option>
+                            <option value="Saturday">Saturday</option>
+                            <option value="Sunday">Sunday</option>
+                        </select>
+                        <input type="time" name="" id="startTime" class="w-full">  <input type="time" class="w-full" name="" id="endTime">
+                       </div>
                     </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-2">

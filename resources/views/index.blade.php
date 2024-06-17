@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-light.css">
 
     <link rel="stylesheet" href="{{ asset('css/print.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <style>
         #menu-toggle:checked + #menu {
    display: block;
@@ -269,6 +271,7 @@
     </div>
 
     @php
+    use Carbon\CarbonPeriod;
         function ordinalSuffix($number)
         {
             if ($number % 100 >= 11 && $number % 100 <= 13) {
@@ -285,6 +288,59 @@
                     return $number . 'th';
             }
         }
+
+
+
+        function generateMonthlySchedule($startDate, $endDate, $scheduleDayTime) {
+    $result = [];
+    $currentDate = new DateTime($startDate);
+    $endDate = new DateTime($endDate);
+    
+    // Extract the day and time from the scheduleDayTime
+    $parts = explode(',', $scheduleDayTime);
+    if (count($parts) != 2) {
+        throw new Exception("Invalid scheduleDayTime format. Expected format: 'Day, Time'");
+    }
+    $day = trim($parts[0]);
+    $time = trim($parts[1]);
+
+    // Extract only the start time from the time range
+    $startTime = explode('-', $time)[0];
+    
+    // Create a DateInterval for one week
+    $interval = new DateInterval('P1W');
+
+    // Adjust the current date to the first occurrence of the desired day and time
+    $currentDate->modify("next $day");
+    $currentDate->setTime(date('H', strtotime($startTime)), date('i', strtotime($startTime)));
+
+    // Iterate over each week until the end date
+    while ($currentDate <= $endDate) {
+        $month = $currentDate->format('F');
+        $dayOfMonth = $currentDate->format('j');
+        $year = $currentDate->format('Y');
+
+        if (!isset($result[$month])) {
+            $result[$month] = [];
+        }
+
+        $result[$month][] = $dayOfMonth;
+
+        // Move to the next week
+        $currentDate->add($interval);
+    }
+
+    // Format the result array as specified
+    $formattedResult = [];
+    foreach ($result as $month => $days) {
+        $formattedResult[] = $month . ' ' . implode(',', $days) . ', ' . $year;
+    }
+
+    return $formattedResult;
+}
+
+
+
     @endphp
 
     {{-- {{ $accounts }} --}}
@@ -400,8 +456,16 @@
                         <div class="payments">
                             @php
                                 $rmonthCollection = [];
+                                $monthlySchedules = generateMonthlySchedule($item->start_of_broadcast, $item->end_of_broadcast, $item->schedule_of_broadcast);
+                               
+                                if (!is_array($monthlySchedules)) {
+                                $monthlySchedules = [$monthlySchedules];
+                            }
                             @endphp
-                            {{-- {{ count($item->payment) }} --}}
+                       
+                        
+
+                    
                             @if (count($item->payment) > 0)
                                 @foreach ($item->payment as $p)
                                     @php
@@ -423,6 +487,8 @@
                         <table class="bps">
                             <tbody>
                                 @php
+                                 $counter = 1;
+
                                     $sdate = \Carbon\Carbon::parse($item->start_of_broadcast)->formatLocalized(
                                         '%d %B %Y',
                                     );
@@ -508,10 +574,49 @@
                                     @endif
                                 @endforeach
 
+                          @php
+                            $payments = $item->payment;
 
+                            // Initialize an empty array to hold the months
+                            $months = [];
 
+                            // Loop through each payment object
+                            foreach ($payments as $payment) {
+                                // Convert the date string to a DateTime object
+                                $date = new DateTime($payment->date);
+
+                                // Format the date to get the full month name
+                                $month = $date->format('F');
+
+                                // Add the month to the array if not already present
+                                if (!in_array($month, $months)) {
+                                    $months[] = $month;
+                                }
+                            }
+                          @endphp
+                        @foreach ($monthlySchedules as $schedule)
+                       @php
+                     
+                       
+                     $parts = explode(' ', $schedule);
+                        $comparisonMonth = $parts[0];
+                        $isMonthIncluded = in_array($comparisonMonth, $months);
+                        $Count = substr_count($schedule, ',');
+                         $nopayments = count($months) <= 0 && $counter ==  2 || $counter ==  1;
+                       @endphp
+                        <tr class="bpstr {{ $isMonthIncluded == true ? 'completed' : ''  }} {{ $nopayments == true  ? 'pending': '' }}">
+                           
+                            <td class="bpstd"><i class="fa-solid fa-play" style="display:{{
+                                 $isMonthIncluded == true ? 'block' : ($nopayments == true ?  'block' : 'none')}}"></i>  {{ ordinalSuffix($counter) }} Billing</td>
+                            <td class="bpstd">{{$schedule}}</td>
+                            <td class="bpstd">{{ intval($item->billing_rate) * intval($Count)}}.00</td>
+                        </tr>
+                        @php
+                        $counter++;
+                 @endphp
+                          @endforeach
                                 {{-- {{ $skey }} {{ $ekey }} --}}
-                                @for ($i = $skey; $i <= $ekey; $i++)
+                                {{-- @for ($i = $skey; $i <= $ekey; $i++)
                                     @if (in_array($i, $rkey))
                                         <tr class="bpstr completed">
                                             <td class="bpstd">{{ ordinalSuffix($i) }} Billing</td>
@@ -538,7 +643,7 @@
                                             <td class="bpstd">{{ intval($item->billing_rate) * 4 }}.00</td>
                                         </tr>
                                     @endif
-                                @endfor
+                                @endfor --}}
 
                             </tbody>
                         </table>
@@ -829,6 +934,52 @@ window.loadFile = function(event) {
     }, 1000);
 });
         })
+   
+    
+        document.getElementById('myForm').addEventListener('submit', function(event) {
+        var dayOfWeek = document.getElementById('dayOfWeek').value;
+        var startTime = document.getElementById('startTime').value;
+        var endTime = document.getElementById('endTime').value;
+
+        // Check if all required fields have values
+        if (!dayOfWeek || !startTime || !endTime) {
+            alert('Please select a day and enter both start and end times.');
+            event.preventDefault(); // Prevent form submission
+        } else {
+            // Format the schedule string
+            var formattedSchedule = `${dayOfWeek}, ${formatTime(startTime)}-${formatTime(endTime)}`;
+            
+            // Update the hidden input value
+            document.getElementById('scheduled_of_broadcast').value = formattedSchedule;
+            
+            // Optional: Display formatted schedule for testing
+            console.log('Formatted Schedule:', formattedSchedule);
+            
+            // Proceed with form submission
+            // this.submit(); // Uncomment to submit the form programmatically
+        }
+    });
+
+// Function to format time (e.g., 2:00PM)
+function formatTime(time) {
+
+    var formattedTime = '';
+    if (time) {
+        var parts = time.split(':');
+        var hour = parseInt(parts[0], 10);
+        var minutes = parts[1].substring(0, 2);
+        var period = parseInt(parts[1].substring(2), 10) >= 12 ? 'PM' : 'AM';
+        if (hour > 12) {
+            hour -= 12;
+        } else if (hour === 0) {
+            hour = 12; // Midnight (0:00) is 12:00 AM
+        }
+        // Convert to 12-hour format with AM/PM
+        formattedTime = `${hour}:${minutes}${period}`;
+    }
+    return formattedTime;
+}
+
     </script>
 </body>
 

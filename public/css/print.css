@@ -225,15 +225,16 @@
     padding: 20px;
 }
 .bpstd {
+    font-size: 13px;
     position: relative;
     border: 1px solid gray;
-    padding: 5px;
+    padding: 3px;
     text-align: center;
 }
 .bpstd i{
     position: absolute;
-    font-size: 22px;
-    left: -12px;
+    font-size: 16px;
+    left: -8px;
     color: rgb(7, 150, 245);
 }
 /* section 4 */
